@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+  <title>ZipEnhancer: Dual-Path Down-Up Sampling-based Zipformer for Monaural Speech Enhancement</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="css/bulma-slider.min.css">
+  <link rel="stylesheet" href="css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ZipEnhancer: Dual-Path Down-Up Sampling-based Zipformer for Monaural Speech Enhancement</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block"><a>Haoxu Wang</a>,</span>
+              <span class="author-block">
+                  <a>Biao Tian</a>,</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Speech Lab, Alibaba Group, China<br></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!--                   Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/Mashiro009/ZipEnhancer" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span> -->
+                <!--                   ArXiv Link -->
+                <!-- <span class="link-block">
+                  <a href="" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                  </a>
+                </span> -->
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In contrast to other sequence tasks modeling three-dimensional hidden layer features, 
+            Dual-Path time and time-frequency domain speech enhancement models are effective and with low parameters 
+            but computationally demanding due to their four-dimensional hidden layer features. 
+            We propose ZipEnhancer, which is Dual-Path Down-Up Sampling-based Zipformer for Monaural Speech Enhancement, 
+            incorporating time and frequency domain Down-Up sampling to reduce computational costs. 
+            We introduce the ZipformerBlock as the core block and propose the design of the 
+            Dual-Path DownSampleStacks that symmetrically scales down and scales up. 
+            Also we introduce the ScaleAdam optimizer and Eden learning rate scheduler to further improve the performance, 
+            Our model achieves new state-of-the-art results on the DNS 2020 Challenge and Voicebank+DEMAND datasets, 
+            with a perceptual evaluation of speech quality (PESQ) of 3.69 and 3.63, using 2.04M parameters and 62.41G FLOPS, 
+            outperforming other methods with similar complexity levels.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<br>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">I. Audio Samples of Speech Enhancement</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <p align = "center" style="text-align: center;">More Audio Samples can be found at https://github.com/ZipEnhancer/ZipEnhancer.</p>
+  <br>
+
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">DNS Challenge Dataset</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center; width: 100px;"><b></b></th>
+      <td style="text-align: center;"><b>Noisy</b></th>
+      <td style="text-align: center;"><b>Clean</b></th>
+      <td style="text-align: center;"><b>FRCRN</b></th>
+      <td style="text-align: center;"><b>MFNet</b></th>
+      <td style="text-align: center;"><b>MP-SENet</b></th>
+      <td style="text-align: center;"><b>ZipEnhancerS (Ours)</b></th>
+      <td style="text-align: center;"><b>ZipEnhancerM (Ours)</b></th>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_frcrn.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_mfnet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_44_ZipEnhancerM.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 1</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_frcrn.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_mfnet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_44_ZipEnhancerM.wav" type="audio/wav"></audio></td>
+
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_frcrn.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_mfnet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_58_ZipEnhancerM.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 2</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_frcrn.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_mfnet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_58_ZipEnhancerM.wav" type="audio/wav"></audio></td>
+    
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_frcrn.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_mfnet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/DNS_Challenge/figs/fileid_170_ZipEnhancerM.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 3</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_frcrn.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_mfnet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/DNS_Challenge/wavs/fileid_170_ZipEnhancerM.wav" type="audio/wav"></audio></td>
+    
+    </tr>
+  </table>
+
+  <br>
+
+
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">VoiceBank+DEMAND Dataset</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center; width: 100px;"><b>Scene</b></th>
+      <td style="text-align: center;"><b>Noisy</b></th>
+      <td style="text-align: center;"><b>Clean</b></th>
+      <td style="text-align: center;"><b>DB-AIAT</b></th>
+      <td style="text-align: center;"><b>CMGAN</b></th>
+      <td style="text-align: center;"><b>MP-SENet</b></th>
+      <td style="text-align: center;"><b>ZipEnhancerS(λ=0.2, Ours)</b></th>
+      <td style="text-align: center;"><b>ZipEnhancerS(λ=0, Ours)</b></th>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_dbaiat.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_cmgan.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_032_ZipEnhancerSwoTime.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 1</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_dbaiat.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_cmgan.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_032_ZipEnhancerSwoTime.wav" type="audio/wav"></audio></td>
+    
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_dbaiat.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_cmgan.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p232_043_ZipEnhancerSwoTime.png" width="200px" height="128px"></td>
+    </tr>
+  
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 2</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_dbaiat.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_cmgan.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p232_043_ZipEnhancerSwoTime.wav" type="audio/wav"></audio></td>
+    
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_dbaiat.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_cmgan.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_mpsenet.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/denoising/VoiceBank+DEMAND/figs/p257_418_ZipEnhancerSwoTime.png" width="200px" height="128px"></td>
+    </tr>
+    
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 3</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_dbaiat.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_cmgan.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_mpsenet.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/denoising/VoiceBank+DEMAND/wavs/p257_418_ZipEnhancerSwoTime.wav" type="audio/wav"></audio></td>
+    
+    </tr>
+  </table>
+  <br>
+</section>
+
+
+
+
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">II. Different model configurations and Ablation study on the DNS2020 dataset.</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td style="text-align: center;"><b>Noisy</b></th>
+      <td style="text-align: center;"><b>Clean</b></th>
+      <td style="text-align: center;"><b>ZipEnhancerS</b></th>
+      <td style="text-align: center;"><b>S2</b></th>
+      <td style="text-align: center;"><b>S3</b></th>
+      <td style="text-align: center;"><b>S4</b></th>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_1111.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_1241.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_1242.png" width="200px" height="128px"></td>
+
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 1</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_1111.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_1241.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_1242.wav" type="audio/wav"></audio></td>
+
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_noisy.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_clean.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_ZipEnhancerS.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_1111.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_1241.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_1242.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 2</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_noisy.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_clean.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_ZipEnhancerS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_1111.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_1241.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_1242.wav" type="audio/wav"></audio></td>
+    </tr>
+  </table>
+  <br>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td style="text-align: center;"><b>S5</b></th>
+      <td style="text-align: center;"><b>S6</b></th>
+      <td style="text-align: center;"><b>S7</b></th>
+      <td style="text-align: center;"><b>S8</b></th>
+      <td style="text-align: center;"><b>S(AdamW)</b></th>
+    </tr>
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_1442.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_2342.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_2682.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_3683.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_44_adamw.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 1</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_1442.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_2342.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_2682.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_3683.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_44_adamw.wav" type="audio/wav"></audio></td>
+
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px;"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_1442.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_2342.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_2682.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_3683.png" width="200px" height="128px"></td>
+      <td><img src="demo/ablation_study/figs/fileid_58_adamw.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; width: 100px; height: 50px; line-height: 50px;"><b>Sample 2</b></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_1442.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_2342.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_2682.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_3683.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="demo/ablation_study/wavs/fileid_58_adamw.wav" type="audio/wav"></audio></td>
+    </tr>
+  </table>  
+</section>
+
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3"></h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <p align = "center" style="text-align: center;">Acknowledge: We update the github page template refer to https://yxlu-0102.github.io/MP-SENet/.</p>
+</section>
+
+
+<hr>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+  </div>
+</section>
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+</body>
+</html>
