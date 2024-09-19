@@ -34,14 +34,3 @@ __pycache__/
 
 *.log
 
-VoiceBank+DEMAND/wavs*
-VoiceBank+DEMAND_my/wavs*
-
-logs/
-results
-generated_files/
-*.ipynb
-best_ckpt/results_mydataset.txt
-
-tmp
-dns2020
